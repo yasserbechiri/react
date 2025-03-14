@@ -13,7 +13,7 @@ function Layout() {
   const hideSidebar = location.pathname === "/login"; 
 
   return (
-    <div className="flex">
+    <>
       {!hideSidebar && <SideBar />} 
       <div className="flex-grow">
         <Routes>
@@ -26,7 +26,7 @@ function Layout() {
           <Route path="/project-info" element={<ProjectInfo />} />
         </Routes>
       </div>
-    </div>
+    </>
   );
 }
 

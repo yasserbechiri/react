@@ -1,5 +1,19 @@
 @import url("@fontsource/fragment-mono");
+@import url("@fontsource/roboto");
+@import '@fontsource/roboto/index.css';
+
 @import "tailwindcss";
 :root {
     --fragment: "Fragment Mono", "monospace"; 
+    --roboto: "Roboto", "sans-serif";
   }
+  
+  .font-fragment {
+    font-family: var(--fragment);
+  }
+  
+  .font-roboto {
+    font-family: var(--roboto);
+  }
+
+  

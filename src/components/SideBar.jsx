@@ -16,13 +16,13 @@ export default function SideBar() {
     ];
 
     return (
-        <div className="flex flex-col w-[288px] h-screen bg-[#2F3E47] text-[#E6F0F2] font-(family-name:--fragment)">
+        <div className="flex flex-col w-1/5 bg-[#2F3E47] text-[#E6F0F2] font-fragment">
             <div className="flex flex-col mt-8 gap-6 items-center justify-center p-4">
                 <img src={profileImg} alt="profile img" className="w-20 h-20 rounded-full" />
                 <p className="text-lg font-semibold">Ahmed Houssam</p>
             </div>
 
-            <ul className="flex flex-col m-6 justify-center items-center font-normal flex-grow">
+            <ul className="flex flex-col m-6 justify-center items-center font-normal py-12 ">
                 {menuItems.map((item) => (
                     <li 
                         key={item.name}
@@ -44,7 +44,7 @@ export default function SideBar() {
 
             <button 
                 type="button" 
-                className="text-[#282A2C] bg-white mx-6 py-2 rounded-full mt-auto mb-6 transition duration-300 
+                className="text-[#282A2C] bg-white mx-6 py-2 rounded-full mt-22 transition duration-300 
                            hover:bg-[#00A99B] hover:text-white hover:shadow-lg hover:scale-105"
                 onClick={() => navigate("/login")} 
             >

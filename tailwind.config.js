@@ -3,7 +3,8 @@ export const content = ["./src/**/*.{js,jsx,ts,tsx}"];
 export const theme = {
     extend: {
         fontFamily: {
-            fragment: ["'Fragment Mono'", "monospace"], // Correct format
+            fragment: ["Fragment Mono", "monospace"], 
+            roboto: ['Roboto', 'sans-serif'],
         },
     },
 };
