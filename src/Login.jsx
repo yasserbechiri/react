@@ -95,16 +95,6 @@ function Login() {
             Log In
           </button>
         </div>
-          {/* Sign Up Link */}
-        <p className="text-sm font-light text-gray-500 dark:text-gray-400 text-center mt-4">
-          Don’t have an account yet?{" "}
-          <a
-            href="#"
-            className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-          >
-            Sign up
-          </a>
-        </p>
       </form>
     </div>
   );
