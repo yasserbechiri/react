@@ -1,1 +1,5 @@
+@import url("@fontsource/fragment-mono");
 @import "tailwindcss";
+:root {
+    --fragment: "Fragment Mono", "monospace"; 
+  }
