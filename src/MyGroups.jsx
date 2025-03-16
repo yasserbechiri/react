@@ -1,53 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
+import { GroupContext } from "./context"; // Import the GroupContext
 import icon from "./assets/Vector.svg";
 import GroupCard from "./components/GroupCard";
 import GroupDetails from "./components/GroupDetails";
 import groups from "./assets/groups";
 import Input from "./components/Input";
+import RemainigTime from "./components/RemainingTime";
 
 export default function MyGroups() {
-  const [remainingTime, setRemainingTime] = useState("Time's up!");
   const [selectedGroup, setSelectedGroup] = useState(null);
-  const dueDate = new Date(2025, 6, 22); // 22 July 2025
+  const navigate = useNavigate();
+  const { hasJoinedTeam, joinTeam } = useContext(GroupContext); // Access GroupContext
 
-  function calculateRemainingTime() {
-    const currentTime = new Date();
-    const timeDifference = dueDate - currentTime;
-
-    if (timeDifference <= 0) {
-      setRemainingTime("Time's up!");
-    } else {
-      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor(
-        (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      setRemainingTime(`${days} days, ${hours} hours, and ${minutes} min`);
-    }
-  }
-
+  // Redirect if the user has already joined a team
   useEffect(() => {
-    calculateRemainingTime();
-    const interval = setInterval(calculateRemainingTime, 60000);
-    return () => clearInterval(interval);
-  }, []);
+    if (hasJoinedTeam) {
+      navigate("/work-space");
+    }
+  }, [hasJoinedTeam, navigate]);
+
+  // Handle joining a team
+  const handleJoinTeam = () => {
+    joinTeam(); // Use the joinTeam function from GroupContext
+    navigate("/work-space");
+  };
 
   return (
-    <div className="flex flex-col gap-6 p-12 pb-0 font-roboto">
-      <h2 className="text-3xl font-semibold">My Groups</h2>
-      <p className="text-lg">You can form or join a group</p>
-
-      <p className="text-xl text-[#BD4F00] font-bold">Note :</p>
-      <div className="flex font-medium">
-        <div className="flex gap-6 w-1/3">
-          <p>Last Date to join a group: </p>
-          <p>{dueDate.toLocaleDateString()}</p>
-        </div>
-        <p className="font-fragment text-lg text-[#bd4f00]">{remainingTime}</p>
-      </div>
+    <div className="flex flex-col gap-6 p-12 font-roboto">
+      <RemainigTime title="My Groups" dueDate={new Date(2025, 5, 22)} />
 
       <section>
         <div className="flex justify-between items-center mt-6 mr-12">
@@ -73,21 +55,19 @@ export default function MyGroups() {
         <p className="text-[#191B1D]">
           To form a group the team must start with three members
         </p>
-        <div className="flex pl-2">
-          <div className="w-[40%]">
-          <Input placeHolder="First member school ID" />
-
+        <div className="flex flex-col md:flex-row gap-6 md:gap-16 pl-2">
+          <div className="">
+            <Input placeHolder="First member school ID" />
           </div>
           <div>
-          <Input placeHolder="Second member school ID" />
-
+            <Input placeHolder="Second member school ID" />
           </div>
         </div>
 
-        <div className="flex mt-8">
-          <div className="w-[40%] space-y-6">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 mt-16">
+          <div className="space-y-6">
             <h3 className="text-[#191B1D] font-medium text-2xl">Order theme</h3>
-            <ul className="pl-4 space-y-8 ">
+            <ul className="pl-4 space-y-4">
               <li>
                 <Input placeHolder="Theme 1" />
               </li>
@@ -103,8 +83,10 @@ export default function MyGroups() {
             </ul>
           </div>
           <div className="space-y-6">
-            <h3 className="text-[#191B1D] font-medium text-2xl">Encadreur Order</h3>
-            <ul className="pl-4 space-y-8 ">
+            <h3 className="text-[#191B1D] font-medium text-2xl">
+              Encadreur Order
+            </h3>
+            <ul className="pl-4 space-y-4">
               <li>
                 <Input placeHolder="encadreur 1" />
               </li>
@@ -119,10 +101,17 @@ export default function MyGroups() {
         </div>
       </section>
 
+      <div className="flex justify-end">
+        <button className="bg-[#00A99B] text-[#E6F0F2] rounded-full py-4 px-6 w-1/6 cursor-pointer hover:bg-[#008e8a] active:bg-[#006f6b]">
+          Create team
+        </button>
+      </div>
+
       {/* Portal for Group Details */}
       {selectedGroup &&
         ReactDOM.createPortal(
           <GroupDetails
+            onJoinTeam={handleJoinTeam}
             group={selectedGroup}
             onClose={() => setSelectedGroup(null)}
           />,
