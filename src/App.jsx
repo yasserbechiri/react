@@ -1,26 +1,27 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { GroupProvider } from "./context"; 
 import SideBar from "./components/SideBar";
 import Login from "./Login";
 import Home from "./Home";
 import MyGroups from "./MyGroups";
-import MyDocuments from "./MyDocuments";
+import WorkSpace from "./WorkSpace";
 import Notifications from "./Notifications";
 import Tasks from "./Tasks";
 import ProjectInfo from "./ProjectInfo";
 
 function Layout() {
   const location = useLocation();
-  const hideSidebar = location.pathname === "/login"; 
+  const hideSidebar = location.pathname === "/login";
 
   return (
     <>
-      {!hideSidebar && <SideBar />} 
+      {!hideSidebar && <SideBar />}
       <div className="flex-grow">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/my-groups" element={<MyGroups />} />
-          <Route path="/my-documents" element={<MyDocuments />} />
+          <Route path="/work-space" element={<WorkSpace />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/project-info" element={<ProjectInfo />} />
@@ -33,7 +34,9 @@ function Layout() {
 function App() {
   return (
     <Router>
-      <Layout />
+      <GroupProvider> {/* Wrap with GroupProvider */}
+        <Layout />
+      </GroupProvider>
     </Router>
   );
 }
