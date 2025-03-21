@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
-import { GroupContext } from "./context"; // Import the GroupContext
+import { GroupContext } from "./GroupContext"; // Import the GroupContext
 import RemainigTime from "./components/RemainingTime";
 import notiIcon from "./assets/notificationIcon.svg";
 import Input from "./components/Input";

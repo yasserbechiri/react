@@ -1,5 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { GroupProvider } from "./context"; 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import { GroupProvider } from "./GroupProvider";
 import SideBar from "./components/SideBar";
 import Login from "./Login";
 import Home from "./Home";
@@ -34,7 +39,9 @@ function Layout() {
 function App() {
   return (
     <Router>
-      <GroupProvider> {/* Wrap with GroupProvider */}
+      <GroupProvider>
+        {" "}
+        {/* Wrap with GroupProvider */}
         <Layout />
       </GroupProvider>
     </Router>
