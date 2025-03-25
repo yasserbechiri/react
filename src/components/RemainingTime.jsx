@@ -1,29 +1,30 @@
 import { useState , useEffect } from "react"; 
 export default function RemainigTime({ dueDate , title }) {
   const [remainingTime, setRemainingTime] = useState("Time's up!");
-  function calculateRemainingTime() {
-    const currentTime = new Date();
-    const timeDifference = dueDate - currentTime;
-
-    if (timeDifference <= 0) {
-      setRemainingTime("Time's up!");
-    } else {
-      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor(
-        (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      setRemainingTime(`${days} days, ${hours} hours, and ${minutes} min`);
-    }
-  }
-
+  
   useEffect(() => {
+    function calculateRemainingTime() {
+      const currentTime = new Date();
+      const timeDifference = dueDate - currentTime;
+
+      if (timeDifference <= 0) {
+        setRemainingTime("Time's up!");
+      } else {
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor(
+          (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        setRemainingTime(`${days} days, ${hours} hours, and ${minutes} min`);
+      }
+    }
+
     calculateRemainingTime();
     const interval = setInterval(calculateRemainingTime, 60000);
     return () => clearInterval(interval);
-  }, []);
+  }, [dueDate]);
 
   return (
     <>

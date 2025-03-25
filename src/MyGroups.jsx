@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
-import { GroupContext } from "./GroupContext"; // Import the GroupContext
+import { GroupContext } from "./components/GroupContext"; // Import the GroupContext
 import icon from "./assets/Vector.svg";
 import GroupCard from "./components/GroupCard";
 import GroupDetails from "./components/GroupDetails";
