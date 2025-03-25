@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { GroupContext } from "../GroupContext"; // Import the context
+import { GroupContext } from "./GroupContext"; // Import the context
 import profileImg from "../assets/profile-img.png";
 
 export default function SideBar() {

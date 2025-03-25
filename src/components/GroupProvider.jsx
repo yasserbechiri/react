@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { GroupContext } from "./GroupContext"; 
+import { GroupContext } from "./GroupContext";
 
 export const GroupProvider = ({ children }) => {
   const [hasJoinedTeam, setHasJoinedTeam] = useState(() => {
